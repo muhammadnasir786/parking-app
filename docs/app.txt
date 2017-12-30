@@ -1,0 +1,22 @@
+App ID : 565057620510286
+
+App Secret
+3572eb055b148f99825d5d83a6ae0bed
+
+
+firebase.auth().signOut().then(()=>{ Console.log("LogOut")}).catch(()=>{ console.log('Erree})
+firebase.auth().onAuthStateChanged((user) => {
+
+            if (user) {
+                // User is signed in.
+                this.props.loginData(user);
+                this.props.isLoggedIn(true);
+                browserHistory.replace('/main');
+            } else {
+                // User is signed out.
+                this.props.loginData(null);
+                this.props.isLoggedIn(false);
+                browserHistory.replace('/');
+            }
+            console.log("is logged in", this.props.isLogged);
+        });
