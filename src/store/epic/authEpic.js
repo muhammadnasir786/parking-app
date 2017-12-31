@@ -16,6 +16,7 @@ firebase.initializeApp(config);
 
 const ref = firebase.database().ref('/');
 const auth = firebase.auth();
+// let userData ;
 
 class AuthEpic {
 
@@ -26,7 +27,7 @@ class AuthEpic {
                 return Observable.fromPromise(
                     auth.createUserWithEmailAndPassword(payload.email,payload.password)
                     .then((res)=>{
-                        ref.child(`users/${res.uid}/`).set(payload);
+                        ref.child(`users/${res.uid}`).set(payload);
                         userCreated = true;
                         // Action Dispatch for reducer to state change , and component render for 
                         // login OK use flages and dispatch at the bottom .map((x)=>{})
@@ -38,14 +39,13 @@ class AuthEpic {
                     })
                 )
                 .map((x)=>{
-                    return userCreated ? AuthAction.createUserSuccessfully() : { type : null}
+                    return userCreated ? AuthAction.createUserSuccessfully('Naisr') : { type : null}
                 })
             })
         }
 
         static loginUser = (action$)=>{
             let authenticate = false;
-            let userData ;
             return action$.ofType(AuthAction.LOGIN_USER)
             .switchMap(({payload })=>{
                 return Observable.fromPromise(
@@ -53,15 +53,20 @@ class AuthEpic {
                     .then((res)=>{
                         authenticate = true;
                         localStorage.setItem('uid',res.uid)
-                        console.log(res)
+                        // console.log(res.uid)
                         // send  userdata at the end for reducer
-
+                        // ref.child(`users/${res.uid}/`).once('value',(s)=>{
+                        //     console.log(s.val())
+                        //     userData = s.val();
+                        //     console.log(userData)
+                        // });
                     }).catch((err)=>{
                         console.log(err)
                     })
                 )
                 .map((x)=>{
-                    return   authenticate ? AuthAction.loginUserSuccessfully() : {type : null}
+                    return { type : AuthAction.LOGIN_USER_SUCCESSFULLY }
+                    // return   authenticate ? AuthAction.loginUserSuccessfully(userData) : {type : null}
                 })
             })
         }

@@ -37,7 +37,7 @@ class LoginCard extends React.Component {
     }
   }
    loginBtn = ()=>{
-     console.log('nasir')
+    //  console.log('nasir')
     this.props.login({ email : this.state.email , password : this.state.password})
   }
   render() {

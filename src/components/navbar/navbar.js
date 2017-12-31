@@ -26,7 +26,15 @@ class Navbar extends React.Component {
                     onLeftIconButtonClick={this.props.isLogin ? this.handleToggle : () => { alert('Login First') }}
                     title="User Authentication Boiler Plate"
                     // iconClassNameRight="muidocs-icon-navigation-expand-more"
-                    iconElementRight={<FlatButton onClick={() => {
+                    iconElementRight={<FlatButton onClick={ this.props.isLogin ? ()=>{
+                        firebase.auth().signOut().then(()=>{
+                            alert('Logout Success Full');
+                            this.props.logout();
+                        }).catch(()=>{
+                            alert('Error')
+                        })
+                    } : 
+                    () => {
                         firebase.auth().signInWithPopup(provider).then( (result) =>{
                             // This gives you a Facebook Access Token. You can use it to access the Facebook API.
                             var token = result.credential.accessToken;
@@ -50,7 +58,7 @@ class Navbar extends React.Component {
                              }).catch((e)=>{
                                 alert(e.message)
                              });
-                            this.props.loginSuccess(userData);
+                            this.props.loginSuccess();
                         
 
 
@@ -66,7 +74,12 @@ class Navbar extends React.Component {
                             console.log(error.message)
                             // ...
                         });
-                    }} label="Facebook Login" />}
+                    }}
+                    
+                     label={this.props.isLogin ? 'Logout' :  'Login With Facebook'}
+                    
+                    
+                     />}
                 />
                 <Drawer
                     docked={false}
@@ -75,9 +88,9 @@ class Navbar extends React.Component {
                     onRequestChange={(open) => this.setState({ open })}
                 >
                     <CardHeader
-                        title={this.props.user.name}
+                        title={'this.props.user.name'}
                         subtitle="MERN Stack Developer"
-                        avatar={this.props.user.photoURL}
+                        avatar={'this.props.user.photoURL'}
                     />
                     <MenuItem onClick={this.handleClose}>Menu Item</MenuItem>
                     <MenuItem onClick={this.handleClose}>Menu Item 2</MenuItem>
@@ -95,7 +108,8 @@ let mapStateToProps = (state) => {
 }
 let mapDispatchToProps = (dispatch)=>{
     return {
-        loginSuccess :  (data)=>{  dispatch(AuthAction.loginUserSuccessfully(data))      }
+        loginSuccess :  ()=>{  dispatch(AuthAction.loginUserSuccessfully())      },
+        logout : ()=> { dispatch(AuthAction.logout())}
     }
 }
 export default connect(mapStateToProps,mapDispatchToProps)(Navbar)

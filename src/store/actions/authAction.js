@@ -29,12 +29,20 @@ class AuthAction {
     }
 
     //------- For Reducer ------
-    static createUserSuccessfully = ()=>{
+    static logout = ()=>{
+        return{
+            type: 'LOGOUT'
+        }
+    }
+    static createUserSuccessfully = (a)=>{
+        // console.log(a)
         return {
             type : AuthAction.CREATE_USER_SUCCESSFULLY,
+            payload : a
         }
     }
     static loginUserSuccessfully = (data)=>{
+        console.log(data,'action')
         return {
             type : AuthAction.LOGIN_USER_SUCCESSFULLY,
             payload : data
