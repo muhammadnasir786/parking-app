@@ -31,7 +31,8 @@ class AuthEpic {
                         userCreated = true;
                         // Action Dispatch for reducer to state change , and component render for 
                         // login OK use flages and dispatch at the bottom .map((x)=>{})
-                        alert('User Successfully Created')
+                        alert('User Successfully Created');
+                        
                     }).catch((err)=>{
                         console.log(err)
                         alert(err.message)
@@ -60,14 +61,16 @@ class AuthEpic {
                         //     userData = s.val();
                         //     console.log(userData)
                         // });
+                        return AuthAction.loginUserSuccessfully()
                     }).catch((err)=>{
-                        console.log(err)
+                        alert(err.message)
+                        return {type : null};
                     })
                 )
-                .map((x)=>{
-                    return { type : AuthAction.LOGIN_USER_SUCCESSFULLY }
-                    // return   authenticate ? AuthAction.loginUserSuccessfully(userData) : {type : null}
-                })
+                // .map((x)=>{
+                //     return { type : AuthAction.LOGIN_USER_SUCCESSFULLY }
+                //     // return   authenticate ? AuthAction.loginUserSuccessfully(userData) : {type : null}
+                // })
             })
         }
 }
