@@ -8,6 +8,7 @@ import { CardHeader } from 'material-ui/Card';
 import { connect } from 'react-redux'
 import * as firebase from 'firebase'
 import AuthAction from '../../store/actions/authAction'
+import history from "../../container/history";
 class Navbar extends React.Component {
 
     constructor(props) {
@@ -24,7 +25,7 @@ class Navbar extends React.Component {
             <div>
                 <AppBar
                     onLeftIconButtonClick={this.props.isLogin ? this.handleToggle : () => { alert('Login First') }}
-                    title="User Authentication Boiler Plate"
+                    title="Real Time Parking Application"
                     // iconClassNameRight="muidocs-icon-navigation-expand-more"
                     iconElementRight={<FlatButton onClick={ this.props.isLogin ? ()=>{
                         firebase.auth().signOut().then(()=>{
@@ -88,12 +89,14 @@ class Navbar extends React.Component {
                     onRequestChange={(open) => this.setState({ open })}
                 >
                     <CardHeader
-                        title={'this.props.user.name'}
+                        title={'Muhammad Nasir'}
                         subtitle="MERN Stack Developer"
-                        avatar={'this.props.user.photoURL'}
+                        avatar={'https://lh3.googleusercontent.com/2AGxdME1c66HuKBnbBWLyJg-ZyCOX1KNasFnD38N185M246t3ILSNuzAO1KV69eYvwo'}
                     />
-                    <MenuItem onClick={this.handleClose}>Menu Item</MenuItem>
-                    <MenuItem onClick={this.handleClose}>Menu Item 2</MenuItem>
+                    <MenuItem onClick={()=>{ history.push('/')}}>DashBboard</MenuItem>
+                    <MenuItem onClick={()=>{ history.push('/profile')}}>Pofile</MenuItem>
+                    <MenuItem onClick={()=>{ history.push('/booking')}}>View Booking List</MenuItem>
+                    <MenuItem onClick={()=>{ history.push('/feedback')}}>FeedBack</MenuItem>
                 </Drawer>
             </div>
         );

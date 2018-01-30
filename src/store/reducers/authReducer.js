@@ -5,7 +5,7 @@ import AuthAction from "../actions/authAction";
 let AuthState = {
     loginShow : true,
     registerShow : false,
-    isLogin: false,
+    isLogin: true,
     user: {}
 }
 

@@ -5,12 +5,12 @@ import  AuthAction from "../actions/authAction";
 
 import * as firebase from 'firebase';
 var config = {
-    apiKey: "AIzaSyDqPpxlIGjEikoqzvZqB7_-10158KdfxOs",
-    authDomain: "reactreduxtodoappfirebase.firebaseapp.com",
-    databaseURL: "https://reactreduxtodoappfirebase.firebaseio.com",
-    projectId: "reactreduxtodoappfirebase",
+    apiKey: "AIzaSyDZdUIg9qqFkd9dOqeuyBscyjqO64HeU3g",
+    authDomain: "real-time-parking-app.firebaseapp.com",
+    databaseURL: "https://real-time-parking-app.firebaseio.com",
+    projectId: "real-time-parking-app",
     storageBucket: "",
-    messagingSenderId: "866095779438"
+    messagingSenderId: "176852661938"
   };
 firebase.initializeApp(config);
 

@@ -8,6 +8,7 @@ import {
     Link
 } from 'react-router-dom'
 import { connect } from 'react-redux';
+import MainApplication from '../mainApp/mainApp'
 
 
 let mapStateToProps = (state) => {
@@ -31,7 +32,7 @@ class Main extends Component {
                         this.props.isLogin ?
                             <div>
                                 <App />
-                                <h1>Login Successfully</h1>
+                                <MainApplication/>
                             </div>
                             :
                             <div>
