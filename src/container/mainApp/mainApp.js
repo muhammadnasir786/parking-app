@@ -13,13 +13,23 @@ import FeedBack from "../feedback/feedback";
 import Profile from "../profile/profile";
 import DashBoard from "../dashboard/dashboard";
 // history.push('/chat');
-
-
+import { connect } from "react-redux";
+import PAAction from "../../store/actions/PAAction";
 
 const style = {
     margin: 12,
 }
 class MainApplication extends Component {
+    constructor(props) {
+        super(props);
+        
+    }
+   componentDidMount(){
+    this.props.getBooking();
+    this.props.getUsers();
+    this.props.getFeedback();
+   } 
+    
     render() {
         return (<div>
             <Router>
@@ -44,5 +54,18 @@ class MainApplication extends Component {
         );
     }
 }
+let mapStateToProps = (state)=>{
+    return {
+        
+    }
+}
+let mapDispatchToProps = (dispatch)=>{
+    return {
+        getUsers : ()=>{ dispatch(PAAction.getUsers())},
+        getFeedback : ()=>{ dispatch(PAAction.getFeedback())},
+        getBooking : ()=>{ dispatch(PAAction.getBooking())}
+    }
+}
 
-export default MainApplication;
+// export default MainApplication;
+export default connect(mapStateToProps, mapDispatchToProps)(MainApplication)

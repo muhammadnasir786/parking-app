@@ -3,18 +3,28 @@ import { combineEpics, createEpicMiddleware } from 'redux-observable';
 
 //requiring all reducers
 import AuthReducer from './reducers/authReducer';
+import PAReducer from './reducers/PAReducer';
 
 //requiring all epics
 import AuthEpic from './epic/authEpic';
-
+import PAEpic from "./epic/PAEpic";
 //combine epic
 const rootEpic = combineEpics(
     AuthEpic.createUser,
-    AuthEpic.loginUser
+    AuthEpic.loginUser,
+    PAEpic.getUsers,
+    PAEpic.getFeedback,
+    PAEpic.getBooking,
+    PAEpic.addBooking,
+    PAEpic.addFeedback,
+    PAEpic.deleteBooking,
+    PAEpic.updateBooking,
+    PAEpic.replyFeedBack
+
 );
 //combine reducers
 const rootReducer = combineReducers({
-    AuthReducer
+    AuthReducer , PAReducer
 })
 
 //creating middleware

@@ -12,6 +12,7 @@ import {
 } from 'material-ui/Table';
 import Avatar from 'material-ui/Avatar';
 import DatePicker from 'material-ui/DatePicker';
+// import { connect } from 'react-redux'
 
 class BookingSlot extends Component {
     render() {
@@ -38,5 +39,6 @@ class BookingSlot extends Component {
         );
     }
 }
-
+ 
 export default BookingSlot;
+// export default connect(mapStateToProps, mapDispatchToProps)(BookingSlot)
