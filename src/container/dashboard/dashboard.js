@@ -120,7 +120,9 @@ class DashBoard extends Component {
                                                             console.log(oneBooking);
                                                             console.log(oneBooking.startingTime, oneBooking.endingTime);
                                                             console.log(this.state.startingTime, this.state.endingTime);
-                                                            flage = true;
+                                                            // if(this.state.startingTime>=oneBooking.startingTime && this.state.startingTime <= oneBooking.endingTime || Z)
+                                                            // flage = true;
+
                                                             // console.log(new Date(oneBooking));
                                                             // console.log(this.state.startingTime.getTime(), this.state.endingTime.getTime());
                                                             // if (oneBooking.sloteNo === this.state.sloteNo) {

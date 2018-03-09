@@ -149,6 +149,20 @@ export default class PAEpic {
                     })
             })
     }
+    static updateProfile = (action$) => {
+        return action$.ofType(PAAction.UPDATE_PROFILE)
+            .switchMap(({ payload }) => {
+                // console.log(payload)
+                return Observable.fromPromise(
+                    ref.child(`users/${payload.key}/`).set(payload.userData).then(() => {
+                        console.log('Booking Delete');
+                    })
+                )
+                    .map((x) => {
+                        return { type: null }
+                    })
+            })
+    }
 
 
 

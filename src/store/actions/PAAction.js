@@ -69,6 +69,12 @@ class PAAction {
             payload: data
         }
     }
+    static updateProfile = (data)=>{
+        return {
+            type : PAAction.UPDATE_PROFILE,
+            
+        }
+    }
 
 
 }

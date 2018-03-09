@@ -11,13 +11,17 @@ class Profile extends Component {
         this.state = {
             isEdit: true,
             name: '',
-            user: {}
+            email: '',
+
         }
     }
     componentWillReceiveProps(nextProps) {
-        console.log(nextProps.users);
-        this.setState({ user: nextProps.users[firebase.auth().currentUser.uid] })
-
+        console.log(nextProps.users[firebase.auth().currentUser.uid]);
+        this.props.users[firebase.auth().currentUser.uid] !== undefined ?
+        this.setState({
+            name: nextProps.users[firebase.auth().currentUser.uid].name,
+            email: nextProps.users[firebase.auth().currentUser.uid].email
+        }) : null
     }
     render() {
         return (
@@ -30,19 +34,26 @@ class Profile extends Component {
                     <TextField
                         onChange={(e) => { this.setState({ name: e.target.value }) }}
                         disabled={this.state.isEdit}
-                        floatingLabelText={this.state.user.name}
+                        floatingLabelText={'name'}
+                        value={this.state.name}
 
                     /><br />
+                    {/* {console.log(this.state.user.email)} */}
                     <TextField
                         disabled={true}
-                        floatingLabelText={this.state.users.emal}
+                        floatingLabelText={'Email'}
+                        value={this.state.email}
                     /><br />
                     <RaisedButton primary={true} label="Cancel" style={{ margin: 12 }} />
                     <RaisedButton primary={true}
                         onClick={() => {
-                            this.props.updateProfile(this.state.name)
+                            let user = {
+                                key: firebase.auth().currentUser.uid,
+                                role: 'user',
+                                name: this.state.name
+                            }
+                            this.props.updateProfile(user)
                             this.setState({ isEdit: !this.state.isEdit })
-
                         }
                         }
                         label={this.state.isEdit ? 'Edit Profile' : 'Update Profile'}
@@ -61,7 +72,7 @@ let mapStateToProps = (state) => {
 }
 let mapDispatchToProps = (dispatch) => {
     return {
-        updateProfile : (data)=>{ dispatch(PAAction.updateProfile(data))}
+        updateProfile: (data) => { dispatch(PAAction.updateProfile(data)) }
     }
 }
 export default connect(mapStateToProps, mapDispatchToProps)(Profile)

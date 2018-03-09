@@ -40,7 +40,8 @@ class FeedBack extends Component {
                         Object.keys(this.props.feedBack).map((val, key) => {
                             let oneFeedback = this.props.feedBack[val];
                             // this.props.users[firebase.auth().currentUser.uid] !== undefined ? this.props.users[firebase.auth().currentUser.uid].role :null
-                            if (oneFeedback.uid === firebase.auth().currentUser.uid) {
+                           
+                            if (oneFeedback.uid === firebase.auth().currentUser.uid && this.props.users[firebase.auth().currentUser.uid].role === '') {
                                 return (
                                     <OneFeedback
                                         key={val}
